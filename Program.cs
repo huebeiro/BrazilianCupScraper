@@ -11,9 +11,11 @@ var tableClass = "table-classification--expansive";
 
 Console.WriteLine($"Navigating to page: '{url}'...\n");
 
-var options = new ChromeOptions();
+var options = new ChromeOptions()
+{
+    PageLoadStrategy = PageLoadStrategy.Eager,
+};
 
-options.PageLoadStrategy = PageLoadStrategy.Eager;
 options.AddArgument("--headless");
 options.AddArgument("--no-sandbox");
 options.AddArgument("--disable-dev-shm-usage");
@@ -22,21 +24,16 @@ using var driver = new ChromeDriver(options);
 
 driver.Navigate().GoToUrl(url);
 
-WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(6))
+var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(3))
 {
-    PollingInterval = TimeSpan.FromSeconds(2),
+    PollingInterval = TimeSpan.FromMilliseconds(250),
 };
-wait.IgnoreExceptionTypes(typeof(ElementNotInteractableException));
 
-wait.Until(d => 
+var table = wait.Until(d => 
     d.FindElement(
         By.CssSelector($"table.{tableClass}")));
 
 Console.WriteLine($"Page title: '{driver.Title}'");
-
-var table = driver.FindElement(
-    By.CssSelector($"table.{tableClass}"));
-
 Console.WriteLine($"Table found with classname: '{tableClass}'");
 
 var rows = table.FindElement(By.TagName("tbody")).FindElements(By.TagName("tr"));
