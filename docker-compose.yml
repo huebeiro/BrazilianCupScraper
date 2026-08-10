@@ -1,0 +1,39 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: braziliancup-postgres
+
+    environment:
+      POSTGRES_DB: braziliancup
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database:/docker-entrypoint-initdb.d
+
+    # Healthcheck para evitar que a aplicação inicie antes da criação das tabelas
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d braziliancup"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build:
+      context: .
+      dockerfile: src/Huebeiro.BrazilianCup.API/Dockerfile
+    container_name: braziliancup-api
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8080:8080"
+    environment:
+      ConnectionStrings__DefaultConnection: "Host=postgres;Port=5432;Database=braziliancup;Username=postgres;Password=postgres"
+
+volumes:
+  postgres_data:

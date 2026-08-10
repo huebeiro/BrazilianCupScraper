@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Huebeiro.BrazilianCup.API/Huebeiro.BrazilianCup.API.csproj" />
+    <Project Path="src/Huebeiro.BrazilianCup.Application/Huebeiro.BrazilianCup.Application.csproj" />
+    <Project Path="src/Huebeiro.BrazilianCup.Domain/Huebeiro.BrazilianCup.Domain.csproj" />
+    <Project Path="src/Huebeiro.BrazilianCup.Infrastructure/Huebeiro.BrazilianCup.Infrastructure.csproj" />
+    <Project Path="src/Huebeiro.BrazilianCup.Scraper/Huebeiro.BrazilianCup.Scraper.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Huebeiro.BrazilianCup.Tests/Huebeiro.BrazilianCup.Tests.csproj" />
+  </Folder>
+</Solution>
