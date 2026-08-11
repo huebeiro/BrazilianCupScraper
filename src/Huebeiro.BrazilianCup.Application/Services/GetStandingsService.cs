@@ -3,18 +3,21 @@ using Huebeiro.BrazilianCup.Application.Interfaces;
 
 namespace Huebeiro.BrazilianCup.Application.Services;
 
+/// <summary>
+/// Serviço para a consulta e ordenação da classificação do campeonato
+/// </summary>
 public class GetStandingsService(ITeamRepository teamRepository)
 {
     public async Task<IReadOnlyList<StandingResponse>> ExecuteAsync()
     {
         var teams = await teamRepository.GetAllAsync();
 
-        /* Searching for standings then orderning by criteria:
-         * 1. Points;
-         * 2. Wins;
-         * 3. Goals Difference;
-         * 4. Goals For;
-         * 5. Team Name.
+        /* Critérios de classificação:
+         * 1. Pontos;
+         * 2. Vitórias;
+         * 3. Saldo de gols;
+         * 4. Gols marcados;
+         * 5. Nome do time.
          * */
         var standings = teams
             .OrderByDescending(x => x.Points)

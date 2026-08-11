@@ -4,6 +4,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Huebeiro.BrazilianCup.API.Controllers;
 
+/// <summary>
+/// Endpoint para o registro de partidas
+/// </summary>
 [ApiController]
 [Route("api/[controller]")]
 public class MatchesController(RegisterMatchService registerMatchService) : ControllerBase

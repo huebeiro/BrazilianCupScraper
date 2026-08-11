@@ -10,6 +10,9 @@ namespace Huebeiro.BrazilianCup.API.Configuration;
 
 public static class ServiceConfiguration
 {
+    /// <summary>
+    /// Método de extensão para a configuração dos serviços da aplicação
+    /// </summary>
     public static IServiceCollection AddApplicationServices(
         this IServiceCollection services,
         IConfiguration configuration)

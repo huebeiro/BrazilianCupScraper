@@ -5,6 +5,9 @@ using Huebeiro.BrazilianCup.Domain.Exceptions;
 
 namespace Huebeiro.BrazilianCup.Application.Services;
 
+/// <summary>
+/// Serviço para registro de novas partidas
+/// </summary>
 public class RegisterMatchService(
     ITeamRepository teamRepository,
     IMatchRepository matchRepository,

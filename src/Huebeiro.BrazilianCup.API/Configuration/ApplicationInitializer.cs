@@ -7,6 +7,9 @@ public class ApplicationInitializer(
     ITeamRepository teamRepository,
     InitializeTeamsService initializeTeamsService)
 {
+    /// <summary>
+    /// Método para a verificação de dados de Time e inicialização do Scraper
+    /// </summary>
     public async Task InitializeAsync(
         CancellationToken cancellationToken = default)
     {

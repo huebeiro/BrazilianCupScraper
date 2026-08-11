@@ -7,6 +7,9 @@ using OpenQA.Selenium.Support.UI;
 
 namespace Huebeiro.BrazilianCup.Scraper;
 
+/// <summary>
+/// Implementação do Scraper Selenium para a coleta de dados do Campeonato
+/// </summary>
 public class SeleniumStandingScraper : IStandingScraper
 {
 
@@ -82,7 +85,7 @@ public class SeleniumStandingScraper : IStandingScraper
 
             var cells = row.FindElements(By.TagName("td"));
 
-            var team = CreateTeam(cells);
+            var team = CreateTeamFromCellList(cells);
 
             teams.Add(team);
         }
@@ -91,7 +94,7 @@ public class SeleniumStandingScraper : IStandingScraper
         return teams.OrderBy(t => t.Name).ToList();
     }
 
-    private static Team CreateTeam(
+    private static Team CreateTeamFromCellList(
         IReadOnlyCollection<IWebElement> cells)
     {
         var cellsText = cells
@@ -103,13 +106,14 @@ public class SeleniumStandingScraper : IStandingScraper
 
         return new Team(
             cellsText[NameIndex],
-            ParseCell(cellsText[WinsIndex]),
-            ParseCell(cellsText[DrawsIndex]),
-            ParseCell(cellsText[LossesIndex]),
-            ParseCell(cellsText[GoalsForIndex]),
-            ParseCell(cellsText[GoalsAgainstIndex]));
+            ParseCellText(cellsText[WinsIndex]),
+            ParseCellText(cellsText[DrawsIndex]),
+            ParseCellText(cellsText[LossesIndex]),
+            ParseCellText(cellsText[GoalsForIndex]),
+            ParseCellText(cellsText[GoalsAgainstIndex]));
     }
-    private static short ParseCell(string text) =>
+
+    private static short ParseCellText(string text) =>
         short.TryParse(text, out short parsed)
             ? parsed
             : throw new WrongStandingFormatException($"Cell '{text}' is not a valid short.");

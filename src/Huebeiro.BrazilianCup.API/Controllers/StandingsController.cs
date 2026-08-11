@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Huebeiro.BrazilianCup.API.Controllers;
 
+/// <summary>
+/// Endpoint para a consulta completa da tabela de classificação e filtragem
+/// </summary>
 [ApiController]
 [Route("api/[controller]")]
 public class StandingsController(
