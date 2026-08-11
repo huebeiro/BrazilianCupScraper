@@ -3,6 +3,9 @@ using Huebeiro.BrazilianCup.Scraper.Interfaces;
 
 namespace Huebeiro.BrazilianCup.Application.Services;
 
+/// <summary>
+/// Serviço para inicialização do Scraper implementado
+/// </summary>
 public class InitializeTeamsService(
     IStandingScraper standingScraper,
     ITeamRepository teamRepository,

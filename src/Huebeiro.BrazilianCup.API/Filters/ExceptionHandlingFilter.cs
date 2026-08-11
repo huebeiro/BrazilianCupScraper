@@ -4,6 +4,10 @@ using System.Text.Json;
 
 namespace Huebeiro.BrazilianCup.API.Filters;
 
+/// <summary>
+/// Middleware para filtragem de exceções disparadas 
+/// pelos controllers e tratamento de resposta
+/// </summary>
 public class ExceptionHandlingFilter(RequestDelegate next)
 {
     public async Task InvokeAsync(HttpContext context)
